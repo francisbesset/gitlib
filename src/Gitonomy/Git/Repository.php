@@ -40,6 +40,13 @@ class Repository
     protected $gitDir;
 
     /**
+     * Slug
+     *
+     * @var string
+     */
+    protected $slug;
+
+    /**
      * Working directory.
      *
      * @var string
@@ -116,6 +123,7 @@ class Repository
     public function __construct($dir, $options = array())
     {
         $options = array_merge(array(
+            'slug'                  => null,
             'working_dir'           => null,
             'debug'                 => true,
             'logger'                => null,
@@ -130,6 +138,7 @@ class Repository
 
         $this->logger  = $options['logger'];
         $this->initDir($dir, $options['working_dir']);
+        $this->slug = $options['slug'];
 
         $this->objects              = array();
         $this->debug                = (bool) $options['debug'];
@@ -267,6 +276,16 @@ class Repository
     public function getGitDir()
     {
         return $this->gitDir;
+    }
+
+    /**
+     * Returns the slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
